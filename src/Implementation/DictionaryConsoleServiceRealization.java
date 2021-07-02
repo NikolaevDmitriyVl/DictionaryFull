@@ -9,7 +9,7 @@ public class DictionaryConsoleServiceRealization implements DictionaryConsoleSer
 
 @Override
     public void showDictionary(Dictionary dictionary){
-    for (Map.Entry pair : dictionary.getDictionary().entrySet()) {
+    for (Map.Entry pair : Dictionary.getInstance().getDictionary().entrySet()) {
         System.out.println(pair);
     }
 }

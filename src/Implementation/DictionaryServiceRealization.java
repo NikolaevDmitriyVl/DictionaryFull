@@ -2,15 +2,13 @@ package Implementation;
 
 import Entity.Dictionary;
 import Services.DicitionaryService;
-
 import java.util.Map;
 
 public class DictionaryServiceRealization implements DicitionaryService {
     Dictionary dictionary;
     @Override
     public void show(Dictionary dictionary) {
-        Map<String,String> dict = dictionary.getDictionary();
-        for(Map.Entry pair : dict.entrySet()){
+        for(Map.Entry pair : dictionary.getDictionary().entrySet()){
             System.out.println(pair);
         }
     }
@@ -19,11 +17,18 @@ public class DictionaryServiceRealization implements DicitionaryService {
     }
     @Override
     public void addPairWord(String englishWord, String russianWord) {
-           dictionary.getDictionary().put(englishWord , russianWord);
+
+        dictionary.getDictionary().put(englishWord , russianWord);
+
+    }
+    public void addPairWordsWithInteger(String englishWord , Integer i){
+        dictionary.getPairCount().put(englishWord,i);
     }
 
     @Override
     public void deletePairWord(String englishWord) {
-          dictionary.getDictionary().remove(englishWord);
+
+        dictionary.getDictionary().remove(englishWord);
+        dictionary.getPairCount().remove(englishWord);
     }
 }

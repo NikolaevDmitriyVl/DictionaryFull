@@ -2,16 +2,18 @@ package Entity;
 import java.util.HashMap;
 import java.util.Map;
 public class Dictionary {
-    private Map<String , String > dictionary;
-    //это наш словарь сюда добавляем новые слова
+    private static HashMap<String , String > dictionary = new HashMap<>();
+    private static Map<String , Integer> pairCount = new HashMap<>();
     public static Dictionary dict;
-    //где изменяется эта переменная? или объект?
 
     private Dictionary(){
         this.dictionary = new HashMap<>();
+        this.pairCount = new HashMap<>();
     }
 
-    //что такое HashMap???
+    public static Map<String, Integer> getPairCount() {
+        return pairCount;
+    }
 
     public static Dictionary getInstance(){
         if(dict==null){

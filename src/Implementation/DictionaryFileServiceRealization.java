@@ -8,14 +8,14 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class DictionaryFileServiceRealization implements DictionaryFileService {
-    //Dictionary dictionary;
     @Override
     public void saveToFile(String pathFile, Dictionary dictionary) throws IOException {
-        File file = new File("file.txt");
-        FileWriter fileWriter = new FileWriter(file);
+        FileWriter fileWriter = new FileWriter(pathFile);
+        System.out.println("size = " + dictionary.getDictionary().entrySet());
         for (Map.Entry pair : dictionary.getDictionary().entrySet()) {
-            fileWriter.write(pair.toString());
+            fileWriter.write(pair.toString() + "\n");
         }
+        fileWriter.close();
     }
     @Override
     public void readFromFile(String pathFile, Dictionary dictionary) throws FileNotFoundException {
@@ -23,9 +23,20 @@ public class DictionaryFileServiceRealization implements DictionaryFileService {
             FileReader fileReader = new FileReader(pathFile);
             Scanner scanner = new Scanner(fileReader);
             while(scanner.hasNext()){
-                System.out.println(scanner.nextLine());
+                String pair = scanner.nextLine();
+                int index = pair.indexOf("=");
+                if (index==-1) continue;
+                String english = pair.substring(0,index);
+                String russian = pair.substring(index+1);
+                dictionary.getDictionary().put(english, russian);
+                dictionary.getPairCount().put(english , 0);
         }
-
+            try {
+                fileReader.close();
+            }
+            catch (Exception e){
+                System.out.println(e.getMessage());
+            }
     }
 
 
